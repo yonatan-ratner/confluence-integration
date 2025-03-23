@@ -2,12 +2,15 @@
 
 ## Procedure
 
-1. Compile Js from Ts with
-    ``` npx tsc ```
-
-2. 
+``` npm start ``` compiles Ts and then runs the output Js 
 
 ## Structure
+
+## OAuth
+
+### Scopes
+![image](https://github.com/user-attachments/assets/079c9138-a8cd-4aea-aeae-04e2a40cf879)
+
 
 ## Constrains & Concessions
 
