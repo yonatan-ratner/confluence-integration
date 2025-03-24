@@ -53,7 +53,7 @@ export async function getPagesInSpace(accessToken: string, cloudId: string, spac
 }
 
 export async function getPageById(accessToken: string, cloudId: string, pageId: string): Promise<PageData> {
-  const uri = `https://api.atlassian.com/ex/confluence/${cloudId}/wiki/api/v2/spaces/pages/${pageId}`;
+  const uri = `https://api.atlassian.com/ex/confluence/${cloudId}/wiki/api/v2/pages/${pageId}?body-format=storage`;
 
   try {
     const response: Response = await fetch(uri, {
@@ -73,7 +73,7 @@ export async function getPageById(accessToken: string, cloudId: string, pageId: 
     return pagesData
   }
   catch (err: any) {
-    console.error("getAllPages error:", err.message);
+    console.error("Get page by id error:", err.message);
     throw err;
   }
 }

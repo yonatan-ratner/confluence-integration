@@ -1,10 +1,6 @@
 import express from 'express'
 import session from 'express-session'
 import dotenv from 'dotenv'
-import { getAllPages } from './services/pageService'
-import { PagesResponse } from './models/IPages'
-import { AccessToken } from './models/IAuth'
-import { AuthService } from './services/authService'
 import authRouter from './routes/authRouter'
 import spacesRouter from './routes/spacesRouter'
 import pagesRouter from './routes/pagesRouter'
@@ -26,10 +22,8 @@ const sessionOptions: session.SessionOptions = {
 app.use(session(sessionOptions))
 
 app.use('/', authRouter)
-app.use('/spaces', spacesRouter)
-app.use('/pages', pagesRouter)
-
-const authService: AuthService = AuthService.Instance()
+app.use('/', spacesRouter)
+app.use('/', pagesRouter)
 
 app.get('/', (req, res) => {
   const uuid: string = crypto.randomUUID()

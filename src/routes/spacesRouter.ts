@@ -7,7 +7,7 @@ import { SpacesResponse } from '../models/ISpaces'
 const router = Router()
 const authService = AuthService.Instance()
 
-router.get('/', async (req, res) => {
+router.get('/spaces', async (req, res) => {
     const token: AccessToken | null = await authService.GetTokenOrRedirect(req, res)
     if (!token) return
 
@@ -76,7 +76,7 @@ router.get('/', async (req, res) => {
         ${spaces.results.map(space => `
             <div class="space">
             <h3>${space.name}</h3>
-            <a class="btn" href="/pages?spaceId=${space.id}">See pages in space</a>
+            <a class="btn" href="/${space.id}/pages">See pages in space</a>
             </div>
         `).join('')}
         </body>
