@@ -2,7 +2,7 @@
 
 ## Procedure
 ### build + run
-``` npm run build ``` - Compiles TS to JS and outputs to ./dist/ directory
+``` npm run build ``` - Compiles TS to JS and outputs to ./dist/ directory </br>
 ``` npm run start ``` - Run node server from generated JS files
 
 ### Debug
