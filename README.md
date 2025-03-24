@@ -23,6 +23,7 @@
             ],
             "program": "${workspaceFolder}\\src\\app.ts",
             "runtimeArgs": [ "-r", "ts-node/register", "-r", "tsconfig-paths/register" ],
+            "console": "integratedTerminal",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
