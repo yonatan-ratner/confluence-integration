@@ -1,10 +1,10 @@
-import { PagesResponse } from "../models/IPages";
+import { PageData, PagesResponse } from "../models/IPages";
 
 export async function getAllPages(accessToken: string, cloudId: string): Promise<PagesResponse> {
-  const confluencePagesAPIUrl: string = "https://yonaratner1/wiki/api/v2/pages"
+  const uri = `https://api.atlassian.com/ex/confluence/${cloudId}/wiki/api/v2/pages`;
 
   try {
-    const response: Response = await fetch(confluencePagesAPIUrl, {
+    const response: Response = await fetch(uri, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -26,25 +26,54 @@ export async function getAllPages(accessToken: string, cloudId: string): Promise
   }
 }
 
+export async function getPagesInSpace(accessToken: string, cloudId: string, spaceId: string): Promise<PagesResponse> {
+  const uri = `https://api.atlassian.com/ex/confluence/${cloudId}/wiki/api/v2/spaces/${spaceId}/pages`;
 
-/*
-const fetch = require('node-fetch');
+  try {
+    const response: Response = await fetch(uri, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Accept': 'application/json',
+      }
+    });
 
-fetch('https://{your-domain}/wiki/api/v2/pages', {
-  method: 'GET',
-  headers: {
-    'Authorization': `Basic ${Buffer.from(
-      'email@example.com:<api_token>'
-    ).toString('base64')}`,
-    'Accept': 'application/json'
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to fetch pages: ${response.status} ${error}`);
+    }
+
+    const pagesData: PagesResponse = await response.json()
+    return pagesData
   }
-})
-  .then(response => {
-    console.log(
-      `Response: ${response.status} ${response.statusText}`
-    );
-    return response.text();
-  })
-  .then(text => console.log(text))
-  .catch(err => console.error(err));
-*/
+  catch (err: any) {
+    console.error("getAllPages error:", err.message);
+    throw err;
+  }
+}
+
+export async function getPageById(accessToken: string, cloudId: string, pageId: string): Promise<PageData> {
+  const uri = `https://api.atlassian.com/ex/confluence/${cloudId}/wiki/api/v2/spaces/pages/${pageId}`;
+
+  try {
+    const response: Response = await fetch(uri, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to fetch pages: ${response.status} ${error}`);
+    }
+
+    const pagesData: PageData = await response.json()
+    return pagesData
+  }
+  catch (err: any) {
+    console.error("getAllPages error:", err.message);
+    throw err;
+  }
+}

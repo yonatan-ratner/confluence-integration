@@ -2,28 +2,28 @@
 https://developer.atlassian.com/cloud/confluence/oauth-2-3lo-apps/#implementing-oauth-2-0--3lo-
 */
 
-import { AuthParams, TokenBody, TokenData, AccessToken, AccessibleResourcesData } from 'models/IAuth';
+import { AuthParams, TokenBody, TokenData, AccessToken, AccessibleResourcesData } from '../models/IAuth';
 import { jsonToQuery } from '../utils/query_utils';
 
+import dotenv from 'dotenv';
+dotenv.config();
 const clientId: string = process.env.ATLASSIAN_CLIENT_ID!;
 const clientSecret: string = process.env.ATLASSIAN_CLIENT_SECRET!;
-const redirectUri: string = process.env.ATLASSIAN_REDIRECT_URI!;
-
-console.log("CID = "+clientId)
-console.log("CS = "+clientSecret)
-console.log("REDIRECT = "+redirectUri)
+const redirectUrl: string = process.env.ATLASSIAN_REDIRECT_URL!;
 
 // TODO: read scopes from .json? other 'maintainable' solution?
 const scopes: string[] = [
-    'read:page:confluence'
+    'read:page:confluence',
+    'read:space:confluence',
 ];
 
 // TODO: refresh token
 export class AuthService {
-    private readonly baseUrl = "https://auth.atlassian.com"
-    private readonly authBaseUrl = `${this.baseUrl}/authorize`
+    private readonly authBaseUrl = "https://auth.atlassian.com"
+    private readonly authUrl = `${this.authBaseUrl}/authorize`
     private readonly tokenUrl = `${this.authBaseUrl}/oauth/token`;
-    private readonly accessibleResourcesUrl = `${this.tokenUrl}/accessible-resources`
+    private readonly apiBaseUrl = "https://api.atlassian.com"
+    private readonly accessibleResourcesUrl = `${this.apiBaseUrl}/oauth/token/accessible-resources`
 
     private static instance: AuthService;
     public static Instance(): AuthService {
@@ -55,14 +55,14 @@ export class AuthService {
             audience: 'api.atlassian.com',
             client_id: clientId,
             scope: scopes.join(' '),
-            redirect_uri: redirectUri,
+            redirect_uri: redirectUrl,
             state: uuid,
             response_type: 'code',
             prompt: 'consent',
         };
 
         const query = jsonToQuery(params);
-        return `${this.authBaseUrl}?${query}`;
+        return `${this.authUrl}?${query}`;
     }
 
     async ExchangeCodeForToken(code: string): Promise<TokenData> {
@@ -71,7 +71,7 @@ export class AuthService {
             client_id: clientId,
             client_secret: clientSecret,
             code: code,
-            redirect_uri: redirectUri,
+            redirect_uri: redirectUrl,
         };
 
         const response: Response = await fetch(this.tokenUrl, {
@@ -88,7 +88,7 @@ export class AuthService {
         return response.json();
     }
 
-    async GetAccessibleResources(accessToken: string): Promise<AccessibleResourcesData> {
+    async GetAccessibleResources(accessToken: string): Promise<AccessibleResourcesData[]> {
         const response: Response = await fetch(this.accessibleResourcesUrl, {
             method: 'GET',
             headers: {

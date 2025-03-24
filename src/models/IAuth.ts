@@ -34,6 +34,6 @@ export interface AccessibleResourcesData {
 
 export interface AccessToken {
     data: TokenData,
-    accessibleResources: AccessibleResourcesData,
+    accessibleResources: AccessibleResourcesData[],
     creationDate: number
 }

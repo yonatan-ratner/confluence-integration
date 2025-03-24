@@ -1,10 +1,11 @@
-import { AccessToken, AccessibleResourcesData, TokenData } from "models/IAuth";
+import { AccessToken, AccessibleResourcesData, TokenData } from "../models/IAuth";
 import { Router } from "express";
-import { AuthService } from "services/authService";
+import { AuthService } from "../services/authService";
 
 const router = Router()
 const authService: AuthService = AuthService.Instance()
 
+//This might be redundant but it allows initiating the flow via REST only
 router.get('/auth/atlassian', (req, res) => {
     const uuid: string = req.session.uuid!
     const authUrl = authService.GetAuthorizationUrl(uuid)
@@ -17,7 +18,7 @@ router.get('/auth/confluence/callback', async (req, res) => {
 
     try {
         const tokenData: TokenData = await authService.ExchangeCodeForToken(code)
-        const cloudData: AccessibleResourcesData = await authService.GetAccessibleResources(tokenData.access_token)
+        const cloudData: AccessibleResourcesData[] = await authService.GetAccessibleResources(tokenData.access_token)
 
         let token: AccessToken = {
             data: tokenData,
@@ -27,6 +28,7 @@ router.get('/auth/confluence/callback', async (req, res) => {
 
         req.session.token = token
         res.redirect(returnEndpoint)
+        //res.redirect('/pages') // TODO: dynamic return endpoint
     } catch (err: any) {
         console.error('OAuth error:', err.message);
         res.status(500).send('OAuth2 callback failed');
