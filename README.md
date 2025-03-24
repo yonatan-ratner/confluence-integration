@@ -1,8 +1,35 @@
 # confluence-integration
 
 ## Procedure
+### build + run
+``` npm run build ``` - Compiles TS to JS and outputs to ./dist/ directory
+``` npm run start ``` - Run node server from generated JS files
 
-``` npm start ``` compiles Ts and then runs the output Js 
+### Debug
+
+``` npm instal --save-dev ts-node tsconfig-paths ```
+
+2. my .vscode/launch.json
+```
+{
+    "configurations": [
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Typescript",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\src\\app.ts",
+            "runtimeArgs": [ "-r", "ts-node/register", "-r", "tsconfig-paths/register" ],
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        }
+    ]
+}
+```
 
 ## Structure
 
@@ -22,6 +49,3 @@ This project is a PoC, as such I allow myself some bad practices and vulnerabilt
 
 ### Node.js project scaffolding
 ``` https://www.digitalocean.com/community/tutorials/setting-up-a-node-project-with-typescript ```
-
-### .gitignore template
-``` https://github.com/microsoft/TypeScript/blob/main/.gitignore ```
