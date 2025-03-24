@@ -37,8 +37,7 @@
 ## OAuth
 
 ### Scopes
-![image](https://github.com/user-attachments/assets/079c9138-a8cd-4aea-aeae-04e2a40cf879)
-
+![image](https://github.com/user-attachments/assets/cbf3cf8f-157e-48f1-8a07-3a2f974f11e7)
 
 ## Constrains & Concessions
 
