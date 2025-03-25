@@ -1,4 +1,4 @@
-# 🚀 Yonatan's Confluence Integration
+# 🚀 Confluence & OAuth2.0 Integration
 
 A proof-of-concept Node.js integration with Atlassian Confluence using OAuth 2.0 (3LO), built in TypeScript.
 
@@ -108,8 +108,8 @@ _(Note: Tests are work in progress)_
 ---
 
 ## 📸 Developer App Configuration
-
-> _Embed your `developer.atlassian.com` OAuth2 App configuration screenshot here._
+![image](https://github.com/user-attachments/assets/d96944a1-4a65-4c36-beed-bb0f5dda02a5)
+![image](https://github.com/user-attachments/assets/3caf90b2-fb59-4c9d-bdcf-124c8bbc4525)
 
 ---
 
