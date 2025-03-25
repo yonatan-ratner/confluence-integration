@@ -8,6 +8,15 @@ A proof-of-concept Node.js integration with Atlassian Confluence using OAuth 2.0
 
 https://www.loom.com/share/ab269ef2f33e464db7dca7d70c6f07a8?sid=267b4823-2769-4b99-b97b-e143edfcf0a0
 
+---
+
+## 📸 Developer App Configuration
+
+![image](https://github.com/user-attachments/assets/d96944a1-4a65-4c36-beed-bb0f5dda02a5)
+![image](https://github.com/user-attachments/assets/3caf90b2-fb59-4c9d-bdcf-124c8bbc4525)
+
+---
+
 ## 📚 Features
 
 | Feature                              | Status |
@@ -137,13 +146,6 @@ This runs all tests, which include:
 - Build compilation test
 - Startup test (auto-builds if needed)
 - All unit & service-level tests
-
----
-
-## 📸 Developer App Configuration
-
-![image](https://github.com/user-attachments/assets/d96944a1-4a65-4c36-beed-bb0f5dda02a5)
-![image](https://github.com/user-attachments/assets/3caf90b2-fb59-4c9d-bdcf-124c8bbc4525)
 
 ---
 
