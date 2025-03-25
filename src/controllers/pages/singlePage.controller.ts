@@ -3,6 +3,7 @@ import { AuthService } from "../../services/authService";
 import { AccessToken } from "../../interfaces/vendors/atlassian/IAuth";
 import { getPageById } from "../../services/pageService";
 import getSinglePageTemplate from "../../templates/pages/singlePageTemplate";
+import { PageData } from "../../interfaces/vendors/atlassian/IPages";
 
 const authService: AuthService = AuthService.Instance();
 
@@ -33,11 +34,11 @@ class singlePageController {
       return;
     }
 
-    const accessToken = token.data.access_token;
-    const cloudId = confluenceResource.id;
-    const page = await getPageById(accessToken, cloudId, pageId);
+    const accessToken: string = token.data.access_token;
+    const cloudId: string = confluenceResource.id;
+    const page: PageData = await getPageById(accessToken, cloudId, pageId);
 
-    const html = getSinglePageTemplate(
+    const html: string = getSinglePageTemplate(
       page.title,
       spaceId,
       JSON.stringify(page.body)

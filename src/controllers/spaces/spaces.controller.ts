@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { getAllSpaces } from "../../services/spaceService";
-import { AccessToken } from "../../interfaces/vendors/atlassian/IAuth";
+import {
+  AccessibleResourcesData,
+  AccessToken,
+} from "../../interfaces/vendors/atlassian/IAuth";
 import { AuthService } from "../../services/authService";
 import { SpacesResponse } from "../../interfaces/vendors/atlassian/ISpaces";
 import getSpacesTemplate from "../../templates/spaces/spacesTemplate";
@@ -14,9 +17,10 @@ class SpacesController {
     );
     if (!token) return;
 
-    const confluenceResource = token.accessibleResources.find((r) =>
-      r.scopes.includes("read:space:confluence")
-    );
+    const confluenceResource: AccessibleResourcesData | undefined =
+      token.accessibleResources.find((r) =>
+        r.scopes.includes("read:space:confluence")
+      );
 
     if (!confluenceResource) {
       res.status(400).send("No Confluence resource found for user.");
@@ -28,7 +32,7 @@ class SpacesController {
       confluenceResource.id
     );
 
-    const html = getSpacesTemplate(spaces);
+    const html: string = getSpacesTemplate(spaces);
     res.send(html);
   }
 }

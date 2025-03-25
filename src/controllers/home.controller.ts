@@ -7,7 +7,7 @@ class homeController {
     const uuid: string = crypto.randomUUID();
     req.session.uuid = uuid;
 
-    const html = getIndexPage();
+    const html: string = getIndexPage();
     res.send(html);
   }
 }

@@ -11,13 +11,13 @@ const authService: AuthService = AuthService.Instance();
 class authController {
   public static async serve(req: Request, res: Response) {
     const uuid: string = req.session.uuid!;
-    const authUrl = authService.GetAuthorizationUrl(uuid);
+    const authUrl: string = authService.GetAuthorizationUrl(uuid);
     res.redirect(authUrl);
   }
 
   public static async callback(req: Request, res: Response) {
     const code: string = req.query.code as string;
-    const returnEndpoint = req.session.returnUrl!;
+    const returnEndpoint: string = req.session.returnUrl!;
 
     try {
       const tokenData: TokenData = await authService.ExchangeCodeForToken(code);
@@ -33,7 +33,7 @@ class authController {
       req.session.token = token;
       res.redirect(returnEndpoint);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : String(err);
+      const message: string = err instanceof Error ? err.message : String(err);
       console.error("OAuth error:", message);
       res.status(500).send("OAuth2 callback failed");
     }
