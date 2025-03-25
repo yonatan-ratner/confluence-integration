@@ -44,6 +44,7 @@
 This project is a PoC, as such I allow myself some bad practices and vulnerabilties.
 
 1. express.js has **7** vulnerabilites (*3 low*, **4 high**)
+2. some 'magic strings' remain, these include URIs, endpoints, scopes, etc...
 
 ## Sources
 
