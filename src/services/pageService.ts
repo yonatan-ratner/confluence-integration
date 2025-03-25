@@ -1,4 +1,7 @@
-import { PageData, PagesResponse } from "../interfaces/vendors/IPages";
+import {
+  PageData,
+  PagesResponse,
+} from "../interfaces/vendors/atlassian/IPages";
 
 //TODO: remove?
 export async function getAllPages(

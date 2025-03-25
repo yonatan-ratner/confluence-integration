@@ -4,7 +4,7 @@ import {
   AccessToken,
   AccessibleResourcesData,
   TokenData,
-} from "../../interfaces/vendors/IAuth";
+} from "../../interfaces/vendors/atlassian/IAuth";
 
 const authService: AuthService = AuthService.Instance();
 

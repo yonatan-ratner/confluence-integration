@@ -8,7 +8,7 @@ import {
   TokenData,
   AccessToken,
   AccessibleResourcesData,
-} from "../interfaces/vendors/IAuth";
+} from "../interfaces/vendors/atlassian/IAuth";
 import { createUrlParamsFromCustomType } from "../utils/typeUtils";
 import {
   Request as ExpressRequest,

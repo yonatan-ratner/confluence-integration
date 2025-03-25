@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { getAllSpaces } from "../../services/spaceService";
-import { AccessToken } from "../../interfaces/vendors/IAuth";
+import { AccessToken } from "../../interfaces/vendors/atlassian/IAuth";
 import { AuthService } from "../../services/authService";
-import { SpacesResponse } from "../../interfaces/vendors/ISpaces";
+import { SpacesResponse } from "../../interfaces/vendors/atlassian/ISpaces";
 import getSpacesTemplate from "../../templates/spaces/spacesTemplate";
 
 const authService: AuthService = AuthService.Instance();

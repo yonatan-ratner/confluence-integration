@@ -1,4 +1,4 @@
-import { PagesResponse } from "../../interfaces/vendors/IPages";
+import { PagesResponse } from "../../interfaces/vendors/atlassian/IPages";
 
 export default function getPage(pages: PagesResponse, spaceId: string): string {
   return `

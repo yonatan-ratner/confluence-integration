@@ -23,7 +23,7 @@ A proof-of-concept Node.js integration with Atlassian Confluence using OAuth 2.0
 ```
 src/
 ├── controllers/        # HTML view rendering templates
-├── models/             # TypeScript interfaces and session augmentation
+├── interfaces/         # TypeScript interfaces and session augmentation
 ├── routes/             # Express route handlers (auth, pages, spaces)
 ├── services/           # Business logic and Confluence API calls
 ├── templates/          # HTML templates as TS strings
@@ -223,3 +223,4 @@ This project is a **Proof-of-Concept (PoC)** focused on OAuth2 integration and c
 
 - [Atlassian OAuth 2.0 Docs](https://developer.atlassian.com/cloud/confluence/oauth-2-3lo-apps/)
 - [Node.js + TypeScript Scaffolding](https://www.digitalocean.com/community/tutorials/setting-up-a-node-project-with-typescript)
+- [GeekyAnts Typescript Boilerplate](https://github.com/GeekyAnts/express-typescript) used as an example for project structure

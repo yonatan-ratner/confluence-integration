@@ -1,4 +1,4 @@
-import { SpacesResponse } from "../../interfaces/vendors/ISpaces";
+import { SpacesResponse } from "../../interfaces/vendors/atlassian/ISpaces";
 
 export default function getSpacesTemplate(spaces: SpacesResponse) {
   return `

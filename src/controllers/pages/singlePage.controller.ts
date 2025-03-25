@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AuthService } from "../../services/authService";
-import { AccessToken } from "../../interfaces/vendors/IAuth";
+import { AccessToken } from "../../interfaces/vendors/atlassian/IAuth";
 import { getPageById } from "../../services/pageService";
 import getSinglePageTemplate from "../../templates/pages/singlePageTemplate";
 
