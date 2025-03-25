@@ -1,10 +1,10 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response } from "express"
 import session from 'express-session'
 import dotenv from 'dotenv'
 import authRouter from './routes/authRouter'
 import spacesRouter from './routes/spacesRouter'
 import pagesRouter from './routes/pagesRouter'
-import getIndexPage from "./templates/indexTemplate";
+import getIndexPage from "./templates/indexTemplate"
 
 dotenv.config()
 

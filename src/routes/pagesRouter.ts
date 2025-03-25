@@ -1,10 +1,10 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response } from "express"
 import { AccessToken } from '../models/IAuth'
 import { AuthService } from '../services/authService'
 import { getPageById, getPagesInSpace } from '../services/pageService'
 import getAllPagesTemplate from '../templates/pagesTemplate'
 import getSinglePageTemplate from '../templates/singlePageTemplate'
-import { PagesResponse } from "../models/IPages";
+import { PagesResponse } from "../models/IPages"
 
 
 const router: Router = Router()

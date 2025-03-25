@@ -121,6 +121,7 @@ This project includes the following AI-assisted contributions:
 - **HTML rendering for routes** (`/spaces`, `/pages`, etc.)
 - **Parsing logs and tracing issues**
 - **Summarizing Atlassian documentation**
+- **Test generation**
 - **This Readme 😄**
 
 ---
