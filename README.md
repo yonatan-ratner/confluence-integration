@@ -6,8 +6,8 @@ A proof-of-concept Node.js integration with Atlassian Confluence using OAuth 2.0
 
 ## 📚 Features
 
-| Feature                               | Status |
-|--------------------------------------|--------|
+| Feature                              | Status |
+| ------------------------------------ | ------ |
 | OAuth 2.0 Authorization Code Flow    | ✅     |
 | List all pages in a Confluence space | ✅     |
 | View content of a specific page      | ✅     |
@@ -43,6 +43,7 @@ test/
 ## 🔧 Setup Instructions
 
 ### 1. Clone & Install
+
 ```
 git clone https://github.com/yonatan-ratner/confluence-integration.git
 cd confluence-integration
@@ -50,29 +51,35 @@ npm install
 ```
 
 ### 2. Set Environment Variables
+
 Create an `.env` file:
+
 ```env
 ATLASSIAN_CLIENT_ID=your-client-id
 ATLASSIAN_CLIENT_SECRET=your-client-secret
 ATLASSIAN_REDIRECT_URL=your-callback-url
-SESSION_SECRET=your-session-secret 
+SESSION_SECRET=your-session-secret
 ```
 
 > **Note**: `SESSION_SECRET` is used by `express-session` for token storage, it can be whatever you want as long as it will be unique.
 
 ### 3. Build & Run
+
 ```
 npm run build
 npm run start
 ```
 
 ### 4. Debug
+
 requires an existing build so first run
+
 ```
 npm run build
 ```
 
-then setup ```./vscode/launch.json``` like so:
+then setup `./vscode/launch.json` like so:
+
 ```
 {
     "version": "0.2.0",
@@ -95,6 +102,7 @@ then setup ```./vscode/launch.json``` like so:
     ]
 }
 ```
+
 Then you can click `F5` to debug, or initiate it manually from the menu.
 
 ---
@@ -105,13 +113,13 @@ Then you can click `F5` to debug, or initiate it manually from the menu.
 
 ### 🧩 Covered Areas
 
-| Test Type       | Status | Description |
-|-----------------|--------|-------------|
-| ✅ Unit Tests    | ✅     | Tests for utilities and internal logic (e.g., AuthService, jsonToQuery) |
-| ✅ Lint + Build  | ✅     | Tests ensure `npm run lint` and `npm run build` succeed |
-| ✅ Startup Test  | ✅     | Verifies that `npm run start` compiles and responds on the `/` route |
-| 🚧 Integration   | 🟡     | Partial testing of service logic and session extensions |
-| ❌ Full E2E      | ❌     | Skipped due to OAuth2 3LO browser-based flow |
+| Test Type       | Status | Description                                                             |
+| --------------- | ------ | ----------------------------------------------------------------------- |
+| ✅ Unit Tests   | ✅     | Tests for utilities and internal logic (e.g., AuthService, jsonToQuery) |
+| ✅ Lint + Build | ✅     | Tests ensure `npm run lint` and `npm run build` succeed                 |
+| ✅ Startup Test | ✅     | Verifies that `npm run start` compiles and responds on the `/` route    |
+| 🚧 Integration  | 🟡     | Partial testing of service logic and session extensions                 |
+| ❌ Full E2E     | ❌     | Skipped due to OAuth2 3LO browser-based flow                            |
 
 ### 🔎 Running Tests
 
@@ -129,6 +137,7 @@ This runs all tests, which include:
 ---
 
 ## 📸 Developer App Configuration
+
 ![image](https://github.com/user-attachments/assets/d96944a1-4a65-4c36-beed-bb0f5dda02a5)
 ![image](https://github.com/user-attachments/assets/3caf90b2-fb59-4c9d-bdcf-124c8bbc4525)
 
@@ -151,32 +160,32 @@ This project includes the following AI-assisted contributions:
 
 ### 🔧 Runtime Dependencies
 
-| Package            | Purpose                                  |
-|--------------------|------------------------------------------|
-| express            | Core web framework                       |
-| express-session    | In-memory session/token management       |
-| dotenv             | Load environment variables               |
+| Package         | Purpose                            |
+| --------------- | ---------------------------------- |
+| express         | Core web framework                 |
+| express-session | In-memory session/token management |
+| dotenv          | Load environment variables         |
 
 ### 🧪 Dev & Debug Dependencies
 
-| Package              | Purpose                                 |
-|----------------------|-----------------------------------------|
-| typescript           | Type-safe JavaScript development        |
-| ts-node              | Run TypeScript directly                 |
-| tsconfig-paths       | Supports path aliasing in debugging     |
-| @types/express       | Type definitions for Express            |
-| @types/express-session | Types for express-session            |
-| mocha / chai         | Test runner and assertions              |
-| cross-env            | Cross-platform env variable support     |
+| Package                | Purpose                             |
+| ---------------------- | ----------------------------------- |
+| typescript             | Type-safe JavaScript development    |
+| ts-node                | Run TypeScript directly             |
+| tsconfig-paths         | Supports path aliasing in debugging |
+| @types/express         | Type definitions for Express        |
+| @types/express-session | Types for express-session           |
+| mocha / chai           | Test runner and assertions          |
+| cross-env              | Cross-platform env variable support |
 
 ### 🧼 Linting
 
-| Package            | Purpose                                  |
-|--------------------|------------------------------------------|
-| eslint             | Code quality and style                   |
-| @eslint/js         | ESLint base rules                        |
-| globals            | Node/browser global definitions          |
-| typescript-eslint  | TypeScript plugin for ESLint             |
+| Package           | Purpose                         |
+| ----------------- | ------------------------------- |
+| eslint            | Code quality and style          |
+| @eslint/js        | ESLint base rules               |
+| globals           | Node/browser global definitions |
+| typescript-eslint | TypeScript plugin for ESLint    |
 
 ---
 

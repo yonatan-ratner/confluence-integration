@@ -1,5 +1,9 @@
-export default function getPage(title: string,spaceId: string, body: string) : string {
-    return `
+export default function getPage(
+  title: string,
+  spaceId: string,
+  body: string
+): string {
+  return `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -42,5 +46,5 @@ export default function getPage(title: string,spaceId: string, body: string) : s
         </div>
       </body>
       </html>
-    `
+    `;
 }

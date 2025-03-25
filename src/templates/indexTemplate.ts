@@ -1,5 +1,5 @@
 export default function getPage(): string {
-    return `
+  return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -41,5 +41,5 @@ export default function getPage(): string {
       <a href="/spaces" class="btn">Get Spaces</a>
     </body>
     </html>
-  `
+  `;
 }

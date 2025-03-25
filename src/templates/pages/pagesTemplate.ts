@@ -1,7 +1,7 @@
-import { PagesResponse } from "../models/IPages";
+import { PagesResponse } from "../../interfaces/vendors/IPages";
 
-export default function getPage(pages: PagesResponse,spaceId: string) : string {
-    return `
+export default function getPage(pages: PagesResponse, spaceId: string): string {
+  return `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -47,13 +47,17 @@ export default function getPage(pages: PagesResponse,spaceId: string) : string {
       <body>
         <a class="back" href="/spaces">⬅ Back to Spaces</a>
         <h1>Pages in Space: ${spaceId}</h1>
-        ${pages.results.map(page => `
+        ${pages.results
+          .map(
+            (page) => `
           <div class="page">
             <h3>${page.title}</h3>
             <a class="btn" href="/${spaceId}/pages/${page.id}">View Page Content</a>
           </div>
-        `).join('')}
+        `
+          )
+          .join("")}
       </body>
       </html>
-    `
+    `;
 }

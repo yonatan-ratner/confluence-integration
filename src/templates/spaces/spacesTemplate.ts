@@ -1,7 +1,7 @@
-import { SpacesResponse } from "../models/ISpaces";
+import { SpacesResponse } from "../../interfaces/vendors/ISpaces";
 
 export default function getSpacesTemplate(spaces: SpacesResponse) {
-    return `
+  return `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -52,13 +52,17 @@ export default function getSpacesTemplate(spaces: SpacesResponse) {
         <body>
         <a class="back" href="/">⬅ Back</a>
         <h1>Spaces</h1>
-        ${spaces.results.map(space => `
+        ${spaces.results
+          .map(
+            (space) => `
             <div class="space">
             <h3>${space.name}</h3>
             <a class="btn" href="/${space.id}/pages">See pages in space</a>
             </div>
-        `).join('')}
+        `
+          )
+          .join("")}
         </body>
         </html>
-        `
+        `;
 }

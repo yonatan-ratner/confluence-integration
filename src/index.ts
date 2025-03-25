@@ -1,15 +1,15 @@
-import express, { Express, Request, Response } from "express"
-import session from 'express-session'
-import dotenv from 'dotenv'
-import authRouter from './routes/authRouter'
-import spacesRouter from './routes/spacesRouter'
-import pagesRouter from './routes/pagesRouter'
-import getIndexPage from "./templates/indexTemplate"
+import express, { Express } from "express";
+import session from "express-session";
+import dotenv from "dotenv";
+import homeRouter from "./routes/home.routes";
+import authRouter from "./routes/auth/auth.routes";
+import spacesRouter from "./routes/spaces/spaces.routes";
+import pagesRouter from "./routes/pages/pages.routes";
 
-dotenv.config()
+dotenv.config();
 
-const app: Express = express()
-const port = 3000
+const app: Express = express();
+const port = 3000;
 
 const sessionOptions: session.SessionOptions = {
   secret: process.env.SESSION_SECRET!,
@@ -17,23 +17,16 @@ const sessionOptions: session.SessionOptions = {
   saveUninitialized: true,
   cookie: {
     secure: false, // change to true in production w/ HTTPS
-    sameSite: 'lax',
+    sameSite: "lax",
   },
-}
-app.use(session(sessionOptions))
+};
+app.use(session(sessionOptions));
 
-app.use('/', authRouter)
-app.use('/', spacesRouter)
-app.use('/', pagesRouter)
-
-app.get('/', (req: Request, res: Response) => {
-  const uuid: string = crypto.randomUUID()
-  req.session.uuid = uuid
-  
-  const html = getIndexPage()
-  res.send(html)
-})
+app.use("/", homeRouter);
+app.use("/", authRouter);
+app.use("/", spacesRouter);
+app.use("/", pagesRouter);
 
 app.listen(port, () => {
-  return console.log(`Express is listening at http://localhost:${port}`)
-})
+  return console.log(`Express is listening at http://localhost:${port}`);
+});
