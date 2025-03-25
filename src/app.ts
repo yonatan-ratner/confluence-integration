@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Express, Request, Response } from "express";
 import session from 'express-session'
 import dotenv from 'dotenv'
 import authRouter from './routes/authRouter'
@@ -7,7 +7,7 @@ import pagesRouter from './routes/pagesRouter'
 
 dotenv.config()
 
-const app = express()
+const app: Express = express()
 const port = 3000
 
 const sessionOptions: session.SessionOptions = {
@@ -25,7 +25,7 @@ app.use('/', authRouter)
 app.use('/', spacesRouter)
 app.use('/', pagesRouter)
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   const uuid: string = crypto.randomUUID()
   req.session.uuid = uuid
   

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// disable no explicit any due to how Atlassian structures this reply
+
 export interface PagesResponse {
     results: PageData[],
     _links: {

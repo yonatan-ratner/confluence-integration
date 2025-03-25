@@ -19,9 +19,9 @@ export async function getAllSpaces(accessToken: string, cloudId: string): Promis
 
     const spacesData: SpacesResponse = await response.json()
     return spacesData
-  }
-  catch (err: any) {
-    console.error("getAllSpaces error:", err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('OAuth error:', message);
     throw err;
   }
 }

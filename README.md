@@ -117,7 +117,7 @@ _(Note: Tests are work in progress)_
 
 This project includes the following AI-assisted contributions:
 
-- **Utility generation** (e.g. `jsonToQuery`)
+- **Documentation generation**
 - **HTML rendering for routes** (`/spaces`, `/pages`, etc.)
 - **Parsing logs and tracing issues**
 - **Summarizing Atlassian documentation**

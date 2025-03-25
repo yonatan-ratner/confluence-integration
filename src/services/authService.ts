@@ -3,7 +3,8 @@ https://developer.atlassian.com/cloud/confluence/oauth-2-3lo-apps/#implementing-
 */
 
 import { AuthParams, TokenBody, TokenData, AccessToken, AccessibleResourcesData } from '../models/IAuth';
-import { jsonToQuery } from '../utils/query_utils';
+import { createUrlParamsFromCustomType } from '../utils/type_utils';
+import {Request as ExpressRequest, Response as ExpressResponse} from 'express';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -38,7 +39,7 @@ export class AuthService {
         return now > token.creationDate + token.data.expires_in;
     }
 
-    public async GetTokenOrRedirect(req: any, res: any): Promise<AccessToken | null> {
+    public async GetTokenOrRedirect(req: ExpressRequest, res: ExpressResponse): Promise<AccessToken | null> {
         const token = req.session.token;
         if (!token || this.isTokenExpired(token)) {
             req.session.returnUrl = req.originalUrl;
@@ -60,8 +61,8 @@ export class AuthService {
             response_type: 'code',
             prompt: 'consent',
         };
-
-        const query = jsonToQuery(params);
+        
+        const query = createUrlParamsFromCustomType(params)
         return `${this.authUrl}?${query}`;
     }
 

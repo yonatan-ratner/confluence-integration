@@ -1,5 +1,6 @@
 import { PageData, PagesResponse } from "../models/IPages";
 
+//TODO: remove?
 export async function getAllPages(accessToken: string, cloudId: string): Promise<PagesResponse> {
   const uri = `https://api.atlassian.com/ex/confluence/${cloudId}/wiki/api/v2/pages`;
 
@@ -19,9 +20,9 @@ export async function getAllPages(accessToken: string, cloudId: string): Promise
 
     const pagesData: PagesResponse = await response.json()
     return pagesData
-  }
-  catch (err: any) {
-    console.error("getAllPages error:", err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('OAuth error:', message);
     throw err;
   }
 }
@@ -45,9 +46,9 @@ export async function getPagesInSpace(accessToken: string, cloudId: string, spac
 
     const pagesData: PagesResponse = await response.json()
     return pagesData
-  }
-  catch (err: any) {
-    console.error("getAllPages error:", err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('OAuth error:', message);
     throw err;
   }
 }
@@ -71,9 +72,9 @@ export async function getPageById(accessToken: string, cloudId: string, pageId: 
 
     const pagesData: PageData = await response.json()
     return pagesData
-  }
-  catch (err: any) {
-    console.error("Get page by id error:", err.message);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('OAuth error:', message);
     throw err;
   }
 }

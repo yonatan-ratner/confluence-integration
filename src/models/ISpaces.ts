@@ -15,8 +15,8 @@ export interface SpacesData {
     authorId: string,
     homepageId: string,
     description: {
-        plain: {},
-        view: {},
+        plain: object,
+        view: object,
     },
     icon: {
         path: string,
