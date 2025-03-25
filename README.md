@@ -14,7 +14,7 @@ A proof-of-concept Node.js integration with Atlassian Confluence using OAuth 2.0
 | Session-based token management       | ✅     |
 | RESTful Express.js routes            | ✅     |
 | Styled HTML rendering                | ✅     |
-| Automated testing with Mocha/Chai    | 🟡 (WIP) |
+| Automated testing with Mocha/Chai    | ✅     |
 
 ---
 
@@ -22,14 +22,20 @@ A proof-of-concept Node.js integration with Atlassian Confluence using OAuth 2.0
 
 ```
 src/
-├── models/         # TypeScript interfaces
-├── routes/         # Express route handlers
-├── services/       # Business logic + API calls
-├── utils/          # Utility functions
-├── app.ts          # Server entry point
+├── controllers/        # HTML view rendering templates
+├── models/             # TypeScript interfaces and session augmentation
+├── routes/             # Express route handlers (auth, pages, spaces)
+├── services/           # Business logic and Confluence API calls
+├── templates/          # HTML templates as TS strings
+├── utils/              # Utility functions (query builder, etc.)
+├── index.ts            # Server entry point
+
 test/
-├── api/            # Test for external integration
-├── services/       # Sample unit tests
+├── integration/        # Build/startup/lint tests
+├── services/           # AuthService unit tests
+├── utils/              # Utility function tests
+├── index.ts            # Global test bootstrap (type loading)
+
 ```
 
 ---
@@ -51,8 +57,8 @@ ATLASSIAN_CLIENT_SECRET=your-client-secret
 ATLASSIAN_REDIRECT_URL=your-callback-url
 SESSION_SECRET=your-session-secret 
 ```
-</br>
-- note that `SESSION_SECRET` is a unique string I used to identify the backend that uses `express-session`
+
+> **Note**: `SESSION_SECRET` is used by `express-session` for token storage, it can be whatever you want as long as it will be unique.
 
 ### 3. Build & Run
 ```
@@ -96,14 +102,29 @@ Then you can click `F5` to debug, or initiate it manually from the menu.
 ## 🧪 Testing
 
 - Built-in test structure using **Mocha** and **Chai**
-- Example tests under `test/services/pageService.test.ts`
 
-### Run Tests:
+### 🧩 Covered Areas
+
+| Test Type       | Status | Description |
+|-----------------|--------|-------------|
+| ✅ Unit Tests    | ✅     | Tests for utilities and internal logic (e.g., AuthService, jsonToQuery) |
+| ✅ Lint + Build  | ✅     | Tests ensure `npm run lint` and `npm run build` succeed |
+| ✅ Startup Test  | ✅     | Verifies that `npm run start` compiles and responds on the `/` route |
+| 🚧 Integration   | 🟡     | Partial testing of service logic and session extensions |
+| ❌ Full E2E      | ❌     | Skipped due to OAuth2 3LO browser-based flow |
+
+### 🔎 Running Tests
+
 ```
-npm run test
+npm test
 ```
 
-_(Note: Tests are work in progress)_
+This runs all tests, which include:
+
+- Linting checks
+- Build compilation test
+- Startup test (auto-builds if needed)
+- All unit & service-level tests
 
 ---
 
@@ -118,48 +139,45 @@ _(Note: Tests are work in progress)_
 This project includes the following AI-assisted contributions:
 
 - **Documentation generation**
+- **Test generation**
 - **HTML rendering for routes** (`/spaces`, `/pages`, etc.)
 - **Parsing logs and tracing issues**
 - **Summarizing Atlassian documentation**
-- **Test generation**
 - **This Readme 😄**
 
 ---
 
 ## 🧰 Tech Stack & Dependencies
 
-This project uses a focused Node.js + TypeScript stack, supported by the following packages:
-
 ### 🔧 Runtime Dependencies
 
-| Package              | Purpose                                                                 |
-|----------------------|-------------------------------------------------------------------------|
-| `express`            | Core web framework for routing and middleware                           |
-| `express-session`    | Session middleware used for temporary in-memory token storage           |
-| `dotenv`             | Loads environment variables from `.env` into `process.env`              |
-
----
+| Package            | Purpose                                  |
+|--------------------|------------------------------------------|
+| express            | Core web framework                       |
+| express-session    | In-memory session/token management       |
+| dotenv             | Load environment variables               |
 
 ### 🧪 Dev & Debug Dependencies
 
-| Package                  | Purpose                                                                 |
-|--------------------------|--------------------------------------------------------------------------|
-| `typescript`             | Type-safe JavaScript development                                        |
-| `ts-node`                | Enables running TypeScript directly (used in debugging setup)           |
-| `tsconfig-paths`         | Supports path aliasing in debugging scenarios                           |
-| `@types/express`         | Type definitions for Express                                            |
-| `@types/express-session` | Type definitions for express-session                                    |
-
----
+| Package              | Purpose                                 |
+|----------------------|-----------------------------------------|
+| typescript           | Type-safe JavaScript development        |
+| ts-node              | Run TypeScript directly                 |
+| tsconfig-paths       | Supports path aliasing in debugging     |
+| @types/express       | Type definitions for Express            |
+| @types/express-session | Types for express-session            |
+| mocha / chai         | Test runner and assertions              |
+| sinon (optional)     | Stub/mocking (not used yet)             |
+| cross-env            | Cross-platform env variable support     |
 
 ### 🧼 Linting
 
-| Package              | Purpose                                                                 |
-|----------------------|-------------------------------------------------------------------------|
-| `eslint`             | Linting to enforce style and prevent bugs                               |
-| `@eslint/js`         | ESLint default JavaScript rules                                         |
-| `globals`            | Defines environment globals (Node.js, browser)                          |
-| `typescript-eslint`  | Adds TypeScript support to ESLint                                       |
+| Package            | Purpose                                  |
+|--------------------|------------------------------------------|
+| eslint             | Code quality and style                   |
+| @eslint/js         | ESLint base rules                        |
+| globals            | Node/browser global definitions          |
+| typescript-eslint  | TypeScript plugin for ESLint             |
 
 ---
 

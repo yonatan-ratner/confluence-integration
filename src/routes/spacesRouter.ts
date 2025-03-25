@@ -21,7 +21,7 @@ router.get('/spaces', async (req, res) => {
         return
     }
 
-    const spaces: SpacesResponse = await getAllSpaces(token.data.access_token, confluenceResource.id)
+    const spaces: SpacesResponse = await getAllSpaces(token.data.accessToken, confluenceResource.id)
 
     const html = getSpacesTemplate(spaces)
     res.send(html)

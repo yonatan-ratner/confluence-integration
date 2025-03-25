@@ -36,7 +36,7 @@ export class AuthService {
 
     protected isTokenExpired(token: AccessToken): boolean {
         const now = Math.floor(Date.now() / 1000)
-        return now > token.creationDate + token.data.expires_in
+        return now > token.creationDate + token.data.expiresIn
     }
 
     public async GetTokenOrRedirect(req: ExpressRequest, res: ExpressResponse): Promise<AccessToken | null> {
@@ -54,11 +54,11 @@ export class AuthService {
     GetAuthorizationUrl(uuid: string): string {
         const params: AuthParams = {
             audience: 'api.atlassian.com',
-            client_id: clientId,
+            clientId: clientId,
             scope: scopes.join(' '),
-            redirect_uri: redirectUrl,
+            redirectUri: redirectUrl,
             state: uuid,
-            response_type: 'code',
+            responseType: 'code',
             prompt: 'consent',
         }
         
@@ -68,11 +68,11 @@ export class AuthService {
 
     async ExchangeCodeForToken(code: string): Promise<TokenData> {
         const body: TokenBody = {
-            grant_type: 'authorization_code',
-            client_id: clientId,
-            client_secret: clientSecret,
+            grantType: 'authorization_code',
+            clientId: clientId,
+            clientSecret: clientSecret,
             code: code,
-            redirect_uri: redirectUrl,
+            redirectUri: redirectUrl,
         }
 
         const response: Response = await fetch(this.tokenUrl, {

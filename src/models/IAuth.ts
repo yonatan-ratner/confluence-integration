@@ -2,25 +2,25 @@
 
 export interface AuthParams {
     audience: string,
-    client_id: string,
+    clientId: string,
     scope: string,
-    redirect_uri: string,
+    redirectUri: string,
     state: string,
-    response_type: string,
+    responseType: string,
     prompt: string,
 }
 
 export interface TokenBody {
-    grant_type: string,
-    client_id: string,
-    client_secret: string,
+    grantType: string,
+    clientId: string,
+    clientSecret: string,
     code: string, // Set this to the authorization code received from the initial authorize call
-    redirect_uri: string,
+    redirectUri: string,
 }
 
 export interface TokenData {
-    access_token: string,
-    expires_in: number,
+    accessToken: string,
+    expiresIn: number,
     scope: string
 }
 

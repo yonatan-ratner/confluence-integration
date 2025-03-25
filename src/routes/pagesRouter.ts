@@ -32,7 +32,7 @@ router.get('/:spaceId/pages', async (req: Request, res: Response) => {
     return
   }
 
-  const accessToken: string = token.data.access_token
+  const accessToken: string = token.data.accessToken
   const cloudId: string = confluenceResource.id
   const pages: PagesResponse = await getPagesInSpace(accessToken, cloudId, String(spaceId))
 
@@ -64,7 +64,7 @@ router.get('/:spaceId/pages/:pageId', async (req: Request, res: Response) => {
     return
   }
 
-  const accessToken = token.data.access_token
+  const accessToken = token.data.accessToken
   const cloudId = confluenceResource.id
   const page = await getPageById(accessToken, cloudId, pageId)
 

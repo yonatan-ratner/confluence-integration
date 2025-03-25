@@ -18,7 +18,7 @@ router.get('/auth/confluence/callback', async (req, res) => {
 
     try {
         const tokenData: TokenData = await authService.ExchangeCodeForToken(code)
-        const cloudData: AccessibleResourcesData[] = await authService.GetAccessibleResources(tokenData.access_token)
+        const cloudData: AccessibleResourcesData[] = await authService.GetAccessibleResources(tokenData.accessToken)
 
         const token: AccessToken = {
             data: tokenData,
