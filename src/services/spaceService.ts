@@ -1,5 +1,17 @@
+/**
+ * Service for handling Confluence space-related API calls.
+ * Fetches all spaces accessible by the user.
+ */
+
 import { SpacesResponse } from "../interfaces/vendors/atlassian/ISpaces";
 
+/**
+ * Fetches all Confluence spaces accessible by the user.
+ * @param accessToken - The access token for authentication.
+ * @param cloudId - The cloud ID of the Confluence instance.
+ * @returns The response containing the list of spaces.
+ * @throws An error if the fetch fails.
+ */
 export async function getAllSpaces(
   accessToken: string,
   cloudId: string

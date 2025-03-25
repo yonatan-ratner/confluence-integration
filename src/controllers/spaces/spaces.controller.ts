@@ -1,3 +1,8 @@
+/**
+ * Controller for handling space-related routes.
+ * Fetches and renders Confluence spaces.
+ */
+
 import { Request, Response } from "express";
 import { getAllSpaces } from "../../services/spaceService";
 import {
@@ -9,7 +14,16 @@ import { SpacesResponse } from "../../interfaces/vendors/atlassian/ISpaces";
 import getSpacesTemplate from "../../templates/spaces/spacesTemplate";
 
 const authService: AuthService = AuthService.Instance();
+
+/**
+ * Controller class for serving Confluence spaces.
+ */
 class SpacesController {
+  /**
+   * Serves Confluence spaces for the authenticated user.
+   * @param req - The HTTP request object.
+   * @param res - The HTTP response object.
+   */
   public static async serve(req: Request, res: Response) {
     const token: AccessToken | null = await authService.GetTokenOrRedirect(
       req,

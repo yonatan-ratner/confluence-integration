@@ -4,6 +4,10 @@ A proof-of-concept Node.js integration with Atlassian Confluence using OAuth 2.0
 
 ---
 
+## Demo
+
+https://www.loom.com/share/ab269ef2f33e464db7dca7d70c6f07a8?sid=267b4823-2769-4b99-b97b-e143edfcf0a0
+
 ## 📚 Features
 
 | Feature                              | Status |

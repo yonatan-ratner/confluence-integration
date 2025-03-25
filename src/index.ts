@@ -1,3 +1,8 @@
+/**
+ * Entry point for the Express server application.
+ * Sets up middleware, routes, and starts the server.
+ */
+
 import express, { Express } from "express";
 import session from "express-session";
 import dotenv from "dotenv";
@@ -11,6 +16,7 @@ dotenv.config();
 const app: Express = express();
 const port = 3000;
 
+// Configure session options
 const sessionOptions: session.SessionOptions = {
   secret: process.env.SESSION_SECRET!,
   resave: false,
@@ -22,11 +28,13 @@ const sessionOptions: session.SessionOptions = {
 };
 app.use(session(sessionOptions));
 
+// Register routes
 app.use("/", homeRouter);
 app.use("/", authRouter);
 app.use("/", spacesRouter);
 app.use("/", pagesRouter);
 
+// Start the server
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
 });

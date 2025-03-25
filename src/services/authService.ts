@@ -1,6 +1,7 @@
 /**
-https://developer.atlassian.com/cloud/confluence/oauth-2-3lo-apps/#implementing-oauth-2-0--3lo-
-*/
+ * Service for handling authentication with Atlassian OAuth2.0.
+ * Manages token exchange, storage, and validation.
+ */
 
 import {
   AuthParams,
@@ -23,6 +24,9 @@ const redirectUrl: string = process.env.ATLASSIAN_REDIRECT_URL!;
 
 const scopes: string[] = ["read:page:confluence", "read:space:confluence"];
 
+/**
+ * Service class for handling Atlassian OAuth2.0 authentication.
+ */
 export class AuthService {
   private readonly authBaseUrl = "https://auth.atlassian.com";
   private readonly authUrl = `${this.authBaseUrl}/authorize`;
@@ -31,6 +35,11 @@ export class AuthService {
   private readonly accessibleResourcesUrl = `${this.apiBaseUrl}/oauth/token/accessible-resources`;
 
   private static instance: AuthService;
+
+  /**
+   * Returns the singleton instance of the AuthService.
+   * @returns The AuthService instance.
+   */
   public static Instance(): AuthService {
     if (!AuthService.instance) {
       AuthService.instance = new AuthService();
@@ -38,11 +47,22 @@ export class AuthService {
     return AuthService.instance;
   }
 
+  /**
+   * Checks if the provided token is expired.
+   * @param token - The access token to check.
+   * @returns True if the token is expired, false otherwise.
+   */
   protected isTokenExpired(token: AccessToken): boolean {
     const now = Math.floor(Date.now() / 1000);
     return now > token.creationDate + token.data.expiresIn;
   }
 
+  /**
+   * Retrieves the token from the session or redirects to the authorization URL if the token is missing or expired.
+   * @param req - The HTTP request object.
+   * @param res - The HTTP response object.
+   * @returns The access token or null if a redirect is performed.
+   */
   public async GetTokenOrRedirect(
     req: ExpressRequest,
     res: ExpressResponse
@@ -58,6 +78,11 @@ export class AuthService {
     return token;
   }
 
+  /**
+   * Constructs the authorization URL for initiating the OAuth2.0 flow.
+   * @param uuid - The unique identifier for the session.
+   * @returns The authorization URL.
+   */
   GetAuthorizationUrl(uuid: string): string {
     const params: AuthParams = {
       audience: "api.atlassian.com",
@@ -73,6 +98,12 @@ export class AuthService {
     return `${this.authUrl}?${query}`;
   }
 
+  /**
+   * Exchanges the authorization code for an access token.
+   * @param code - The authorization code received from the OAuth2.0 flow.
+   * @returns The token data.
+   * @throws An error if the token exchange fails.
+   */
   async ExchangeCodeForToken(code: string): Promise<TokenData> {
     const body: TokenBody = {
       grant_type: "authorization_code",
@@ -96,6 +127,12 @@ export class AuthService {
     return response.json();
   }
 
+  /**
+   * Retrieves the accessible resources for the provided access token.
+   * @param accessToken - The access token.
+   * @returns The list of accessible resources.
+   * @throws An error if the fetch fails.
+   */
   async GetAccessibleResources(
     accessToken: string
   ): Promise<AccessibleResourcesData[]> {
