@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { AuthService } from "../../services/authService";
-import {
-  AccessibleResourcesData,
-  AccessToken,
-} from "../../interfaces/vendors/atlassian/IAuth";
+import { AccessToken } from "../../interfaces/vendors/atlassian/IAuth";
 import { getPagesInSpace } from "../../services/pageService";
 import getAllPagesTemplate from "../../templates/pages/pagesTemplate";
 import { PagesResponse } from "../../interfaces/vendors/atlassian/IPages";
