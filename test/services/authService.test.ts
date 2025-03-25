@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { AuthService } from "../../src/services/authService";
-import { AccessToken } from "../../src/models/IAuth";
+import { AccessToken } from "../../src/interfaces/vendors/atlassian/IAuth";
 
 describe("AuthService", () => {
   const auth = AuthService.Instance();
@@ -28,7 +28,7 @@ describe("isTokenExpired", () => {
   it("should return false if token is not expired", () => {
     const token: AccessToken = {
       data: {
-        accessToken: "valid",
+        access_token: "valid",
         expiresIn: 3600,
         scope: "read:page:confluence",
       },
@@ -43,7 +43,7 @@ describe("isTokenExpired", () => {
   it("should return true if token is expired", () => {
     const token: AccessToken = {
       data: {
-        accessToken: "expired",
+        access_token: "expired",
         expiresIn: 3600,
         scope: "read:page:confluence",
       },

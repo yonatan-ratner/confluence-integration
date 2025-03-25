@@ -21,10 +21,8 @@ const clientId: string = process.env.ATLASSIAN_CLIENT_ID!;
 const clientSecret: string = process.env.ATLASSIAN_CLIENT_SECRET!;
 const redirectUrl: string = process.env.ATLASSIAN_REDIRECT_URL!;
 
-// TODO: read scopes from .json? other 'maintainable' solution?
 const scopes: string[] = ["read:page:confluence", "read:space:confluence"];
 
-// TODO: refresh token
 export class AuthService {
   private readonly authBaseUrl = "https://auth.atlassian.com";
   private readonly authUrl = `${this.authBaseUrl}/authorize`;

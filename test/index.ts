@@ -1,1 +1,1 @@
-import "../src/models/ISession";
+import "../src/interfaces/models/Express/ISession";
