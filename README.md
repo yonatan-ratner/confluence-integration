@@ -167,7 +167,6 @@ This project includes the following AI-assisted contributions:
 | @types/express       | Type definitions for Express            |
 | @types/express-session | Types for express-session            |
 | mocha / chai         | Test runner and assertions              |
-| sinon (optional)     | Stub/mocking (not used yet)             |
 | cross-env            | Cross-platform env variable support     |
 
 ### 🧼 Linting
